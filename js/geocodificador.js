@@ -8,6 +8,19 @@ geocodificadorModulo = (function () {
      y que llame a la función pasada por parámetro con los siguientes parámetros
      dirección: la dirección pasada por parámetro
      coordenada: la ubicación de tipo google.maps.LatLng */
+
+     // revisar esta funcion para obtener la coordenada
+      geocodificador.geocode({ 'address': location }, function (results, status) {
+        if( status == google.maps.GeocoderStatus.OK ) {
+          let coordenadas = results[0].GeocoderGeometry.location 
+          funcionALlamar(direccion, coordenadas);
+          return results[0];
+        } else {
+        swal('No existe esa dirección', 'Vuelve a intentar', 'error')
+      }
+      });
+    }
+  } 
   }
 
     // Inicializo el geocoder que obtiene las corrdenadas a partir de una dirección
