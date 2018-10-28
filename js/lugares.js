@@ -1,5 +1,5 @@
 lugaresModulo = (function () {
-  var servicioLugares // Servicio para obtener lugares cercanos e información de lugares(como fotos, puntuación del lugar,etc).
+  let servicioLugares // Servicio para obtener lugares cercanos e información de lugares(como fotos, puntuación del lugar,etc).
 
     // Completa las direcciones ingresadas por el usuario a y establece los límites
     // con un círculo cuyo radio es de 20000 metros.
