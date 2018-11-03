@@ -11,7 +11,7 @@ geocodificadorModulo = (function () {
   
   console.log(direccion)
      
-     // El parametro de geocode es un objeto con dos propiedades: address y el callback con la request al servidor
+  // El parametro de geocode es un objeto con dos propiedades: address y el callback con la request al servidor
   if(direccion){
     geocodificador.geocode(
       {address : direccion}, 
@@ -27,8 +27,6 @@ geocodificadorModulo = (function () {
             text: "No se encontro la dirección, verifique e intentelo con otra",
             title: "¡Channn!",
             type: "error",
-            showCloseButton: true,
-            showCancelButton: false,
           })
         };
       }
