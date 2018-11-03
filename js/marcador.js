@@ -23,10 +23,10 @@ marcadorModulo = (function () {
 
     // Agrega la dirección del marcador en la lista de Lugares Intermedios
   function agregarDireccionMarcador (marcador) {
-        // console.log(marcador.getPosition().lat() + ',' + marcador.getPosition().lng());
+        console.log(marcador.getPosition().lat() + ',' + marcador.getPosition().lng());
     var marcadorLatLng = new google.maps.LatLng({ lat: marcador.getPosition().lat(), lng: marcador.getPosition().lng() })
     direccionesModulo.agregarDireccion(marcador.getTitle(), marcadorLatLng)
-    debugger;
+    debugger
   }
 
     // Agrega al mapa todos los marcadores.
@@ -180,7 +180,9 @@ marcadorModulo = (function () {
 
     // Devuelve la posicion de la variable miMarcador
   function damePosicion () {
+    debugger
     return miMarcador.getPosition()
+    
   }
 
     // Agrego el marcador con la ruta. Le asigna las letras correspondientes al marcador.

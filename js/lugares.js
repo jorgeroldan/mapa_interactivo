@@ -23,6 +23,18 @@ lugaresModulo = (function () {
     del tipo (tipodeLugar) y con el radio indicados en el HTML cerca del lugar
     pasado como parámetro y llame a la función marcarLugares. */
 
+    let tipoDeLugar = document.getElementById('tipoDeLugar').value 
+    let radio = document.getElementById('radio').value
+    console.log(tipoDeLugar)
+    console.log(radio)
+
+    servicioLugares.nearbySearch({
+      'location': posicion,
+      'radius': radio,
+      'types': tipoDeLugar
+    }, (response, status)=>marcadorModulo.marcarLugares(response,status))
+
+
   }
   return {
     inicializar,
