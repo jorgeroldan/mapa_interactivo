@@ -1,9 +1,9 @@
 marcadorModulo = (function () {
-  var miMarcador // El marcador de la direccion buscada
-  var marcadores = [] // Todos los marcadores de la búsqueda
-  var marcadoresRuta = [] // Los marcadores de la ruta
-  var limites // Límites del mapa
-  var infoVentana // La ventana con información
+  let miMarcador // El marcador de la direccion buscada
+  let marcadores = [] // Todos los marcadores de la búsqueda
+  let marcadoresRuta = [] // Los marcadores de la ruta
+  let limites // Límites del mapa
+  let infoVentana // La ventana con información
 
     // Crea un marcador y lo muestra en el mapa
   function mostrarMiMarcador (ubicacion) {
@@ -12,21 +12,12 @@ marcadorModulo = (function () {
         Este marcador debe tener un título, una animación.
         El marcador que vas a crear debe asignarse a la variable miMarcador */
 
-    // This event listener calls addMarker() when the map is clicked.
-    // google.maps.event.addListener(map, 'click', function(event) {
-    //   addMarker(event.latLng, map);
-    // });
-
-    // // Adds a marker to the map.
-    // function addMarker(location, map) {
-    //   // Add the marker at the clicked location, and add the next-available label
-    //   // from the array of alphabetical characters.
-    //   var marker = new google.maps.Marker({
-    //     position: location,
-    //     label: miMarcador[marcadores++ % marcadores.length],
-    //     map: map
-    //   });
-    // }
+    miMarcador = new google.maps.Marker({
+      map: mapa,
+      animation: google.maps.Animation.DROP,
+      title: document.getElementById('direccion').value,
+      position: ubicacion 
+    });
 
   }
 
