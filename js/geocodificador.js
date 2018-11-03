@@ -1,6 +1,10 @@
 geocodificadorModulo = (function () {
   let geocodificador // Geocodificador que dada una dirección devuelve una coordenada
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> da2e82d702b7d1571c84c8ec4db76106249b95c6
     // Permite obtener las coordenadas y las usa con la función llamada por parámtero
   function usaDireccion (direccion, funcionALlamar) {
         /* Completar la función usaDireccion(dirección,funcionALlamar)
@@ -8,6 +12,7 @@ geocodificadorModulo = (function () {
      y que llame a la función pasada por parámetro con los siguientes parámetros
      dirección: la dirección pasada por parámetro
      coordenada: la ubicación de tipo google.maps.LatLng */
+<<<<<<< HEAD
   
   console.log(direccion)
      
@@ -46,10 +51,11 @@ geocodificadorModulo = (function () {
 
         // cuando se presiona la tecla enter en el campo direccion, se agrega la dirección y se muestra en el mapa
     document.querySelector('#direccion').addEventListener('keypress', function (e) {
-      var key = e.which || e.keyCode
+      let key = e.which || e.keyCode
       if (key === 13) { // 13 is enter
                 // code for enter
-        var direccion = document.getElementById('direccion').value
+                console.log("direccion guardada")
+        let direccion = document.getElementById('direccion').value
         that.usaDireccion(direccion, direccionesModulo.agregarDireccionYMostrarEnMapa)
       }
     })
