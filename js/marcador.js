@@ -11,6 +11,23 @@ marcadorModulo = (function () {
         en la posición pasada por parámetro y mostrarlo en el mapa.
         Este marcador debe tener un título, una animación.
         El marcador que vas a crear debe asignarse a la variable miMarcador */
+
+    // This event listener calls addMarker() when the map is clicked.
+    // google.maps.event.addListener(map, 'click', function(event) {
+    //   addMarker(event.latLng, map);
+    // });
+
+    // // Adds a marker to the map.
+    // function addMarker(location, map) {
+    //   // Add the marker at the clicked location, and add the next-available label
+    //   // from the array of alphabetical characters.
+    //   var marker = new google.maps.Marker({
+    //     position: location,
+    //     label: miMarcador[marcadores++ % marcadores.length],
+    //     map: map
+    //   });
+    // }
+
   }
 
     // Agrega la dirección del marcador en la lista de Lugares Intermedios
@@ -18,6 +35,7 @@ marcadorModulo = (function () {
         // console.log(marcador.getPosition().lat() + ',' + marcador.getPosition().lng());
     var marcadorLatLng = new google.maps.LatLng({ lat: marcador.getPosition().lat(), lng: marcador.getPosition().lng() })
     direccionesModulo.agregarDireccion(marcador.getTitle(), marcadorLatLng)
+    debugger;
   }
 
     // Agrega al mapa todos los marcadores.
