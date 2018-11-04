@@ -50,17 +50,21 @@ lugaresModulo = (function () {
     del tipo (tipodeLugar) y con el radio indicados en el HTML cerca del lugar
     pasado como parámetro y llame a la función marcarLugares. */
 
-    let tipoDeLugar = document.getElementById('tipoDeLugar').value 
-    let radio = document.getElementById('radio').value
-    console.log(tipoDeLugar)
-    console.log(radio)
+    //Guardar en un objeto los parametros de NerbySearch (posición, tipoDeLugar, radio)
+    let parametrosNerbySearch = {
+      location: posicion,
+      type: [document.getElementById('tipoDeLugar').value], 
+      radius: document.getElementById('radio').value
+    }
+    console.log(parametrosNerbySearch.type)
+    console.log(parametrosNerbySearch.radius)
 
+    //Consultar el metodo de la API de Google nerbySearch(location, radius, types) con su respectiva función callBack en caso de que el status de consulta sea OK
     servicioLugares.nearbySearch({
-      'location': posicion,
-      'radius': radio,
-      'types': tipoDeLugar
+      'location': parametrosNerbySearch.location,
+      'radius': parametrosNerbySearch.radius,
+      'types': parametrosNerbySearch.type
     }, (response, status)=>marcadorModulo.marcarLugares(response,status))
-
 
   }
   return {

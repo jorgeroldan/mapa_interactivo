@@ -18,9 +18,9 @@ geocodificadorModulo = (function () {
           funcionALlamar(direccion, coordenadas)
           }
         else {
-          console.log('error' + status)
+          console.log('Error! The status is:' + status)
           swal({
-            text: "No se encontro la dirección, verifique e intentelo con otra",
+            text: "No se encontro la dirección, intenta de nuevo",
             title: "¡Channn!",
             type: "error",
           })
