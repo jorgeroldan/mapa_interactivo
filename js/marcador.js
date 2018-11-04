@@ -180,7 +180,6 @@ marcadorModulo = (function () {
 
     // Devuelve la posicion de la variable miMarcador
   function damePosicion () {
-    debugger
     return miMarcador.getPosition()
     
   }
