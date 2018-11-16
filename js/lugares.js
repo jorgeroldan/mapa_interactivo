@@ -12,7 +12,7 @@ lugaresModulo = (function () {
         let direccion;
         let circulo = new google.maps.Circle({
           center: posicionCentral,
-          radius: 200000
+          radius: 20000
         })
 
         let inputDireccion = document.getElementById("direccion"),

@@ -40,6 +40,7 @@ direccionesModulo = (function () {
     }
   }
 
+  // CALLBACK que viene de geocodificador.js 
     // Agrega la dirección en las listas de puntos intermedios y lo muestra con el street view
   function agregarDireccionYMostrarEnMapa (direccion, ubicacion) {
     that = this

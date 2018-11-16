@@ -13,7 +13,8 @@ geocodificadorModulo = (function () {
       {address : direccion}, 
       function(results, status){
         if (status === 'OK'){
-          let coordenadas = results[0].geometry.location.toJSON(direccion)
+          let coordenadas = results[0].geometry.location
+          // let coordenadas = results[0].geometry.location.toJSON(direccion)
           console.log(coordenadas) 
           funcionALlamar(direccion, coordenadas)
           }
