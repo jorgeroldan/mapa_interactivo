@@ -12,8 +12,7 @@ streetViewModulo = (function () {
           heading: '',
           pitch: ''
         }, 
-        visible:true, 
-        // mapa: mapa.setStreetView(panorama)
+        visible:true 
         });
         
         
@@ -26,17 +25,10 @@ streetViewModulo = (function () {
          de la variable panorama y cambia el mapa de modo tal que se vea
          el streetView de la posición actual. */
 
-        //  const posicion = {
-        //    lat: ubicacion.lat(), 
-        //    lng: ubicacion.lng()
-        //  }
-
-        const posicion = ubicacion
-
-         panorama.setPosition(posicion)
+         panorama.setPosition(ubicacion)
          panorama.setPov({
-          heading: 34,
-          pitch: 10
+          heading: 45,
+          pitch: -10
          })
 
   }

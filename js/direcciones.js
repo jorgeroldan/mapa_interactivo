@@ -41,6 +41,7 @@ direccionesModulo = (function () {
   }
 
   // CALLBACK que viene de geocodificador.js 
+
     // Agrega la dirección en las listas de puntos intermedios y lo muestra con el street view
   function agregarDireccionYMostrarEnMapa (direccion, ubicacion) {
     that = this
@@ -97,6 +98,54 @@ direccionesModulo = (function () {
         /* Completar la función calcularYMostrarRutas , que dependiendo de la forma en que el
          usuario quiere ir de un camino al otro, calcula la ruta entre esas dos posiciones
          y luego muestra la ruta. */
+
+        let desde = document.querySelector('#desde').value;
+        let hasta = document.querySelector('#hasta').value;
+        let modoViaje = document.querySelector('#comoIr').value;
+        let ptosIntermedios = document.querySelector('#puntosIntermedios');
+        let arrPtosIntermedios = [];
+
+        // No esta entrando el Switch?
+        switch (modoViaje) {
+          case "Auto":" DRIVING "
+          case "Caminando":" WALKING "
+          case "Bus/Subterraneo/Tren":" TRANSIT "
+          console.log(modoViaje)
+            break;
+          
+          default: " BICYCLING "
+            break;
+        }
+
+        for(let i=0; i<ptosIntermedios.length; i++){
+          if(ptosIntermedios.options[i].selected) {
+            arrPtosIntermedios.push({
+              location: ptosIntermedios[i].value,
+              stopover: true,
+            });
+          };
+        };
+
+        marcadorModulo.agregarMarcadorRuta(document.getElementById('desde').value, 'A', true)
+        // Agrega los marcadores de los puntos intermedios con letras consecutivas.
+        for (var i = 0; i < ptosIntermedios.length; i++) {
+            // console.log(ptsIntermedios[i].location);
+            var marcadorLetra = String.fromCharCode('B'.charCodeAt(0) + i)
+            marcadorModulo.agregarMarcadorRuta(ptosIntermedios[i].location, marcadorLetra, false)
+        }
+        marcadorModulo.agregarMarcadorRuta(document.getElementById('hasta').value, String.fromCharCode('B'.charCodeAt(0) + ptosIntermedios.length), false)
+
+        servicioDirecciones.route({
+          origin: desde,
+          destination: hasta,
+          travelMode: modoViaje,
+          waypoints: arrPtosIntermedios
+
+        }, (response, status) => {
+          if(status === "OK"){
+             mostradorDirecciones.setDirections(response)
+          }
+        });
   }
 
   return {
