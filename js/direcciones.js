@@ -104,28 +104,11 @@ direccionesModulo = (function () {
         let hasta = document.querySelector('#hasta').value;
         let modoViaje = document.querySelector('#comoIr').value;
         let puntosIntermedios = document.querySelector('#puntosIntermedios');
-        let arrayPtosIntermedios = [];
-
-        // No esta entrando el Switch?
-        switch (modoViaje) {
-          case 'Auto':
-            modoViaje = " DRIVING "
-            break;
-          case 'Caminando':
-            modoViaje = " WALKING "
-            break;
-          case 'Bus/Subterraneo/Tren':
-            modoViaje = " TRANSIT "
-          default:
-            modoViaje = " BICYCLING "
-            break;
-        }
-
-        console.log(modoViaje)
+        let wayPoints = [];
 
         for(let i=0; i<puntosIntermedios.length; i++){
           if(puntosIntermedios.options[i].selected) {
-            arrayPtosIntermedios.push({
+            wayPoints.push({
               location: puntosIntermedios[i].value,
               stopover: true,
             });
@@ -144,8 +127,8 @@ direccionesModulo = (function () {
         servicioDirecciones.route({
           origin: desde,
           destination: hasta,
-          travelMode: "TRANSIT",
-          waypoints: arrayPtosIntermedios
+          travelMode: google.maps.TravelMode[modoViaje],
+          waypoints: wayPoints
 
         }, (response, status) => {
           if(status === "OK"){
