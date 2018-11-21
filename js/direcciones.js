@@ -102,9 +102,11 @@ direccionesModulo = (function () {
 
         let desde = document.querySelector('#desde').value;
         let hasta = document.querySelector('#hasta').value;
-        let modoViaje = document.querySelector('#comoIr').value;
+        let modoViaje =  document.querySelector('#comoIr').value;
+        let travelMode = google.maps.TravelMode[modoViaje]
         let puntosIntermedios = document.querySelector('#puntosIntermedios');
         let wayPoints = [];
+
 
         for(let i=0; i<puntosIntermedios.length; i++){
           if(puntosIntermedios.options[i].selected) {
@@ -126,7 +128,7 @@ direccionesModulo = (function () {
         servicioDirecciones.route({
           origin: desde,
           destination: hasta,
-          travelMode: google.maps.TravelMode[modoViaje],
+          travelMode: travelMode,
           waypoints: wayPoints
 
         }, (response, status) => {
