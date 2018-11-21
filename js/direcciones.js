@@ -99,28 +99,34 @@ direccionesModulo = (function () {
          usuario quiere ir de un camino al otro, calcula la ruta entre esas dos posiciones
          y luego muestra la ruta. */
 
+
         let desde = document.querySelector('#desde').value;
         let hasta = document.querySelector('#hasta').value;
         let modoViaje = document.querySelector('#comoIr').value;
-        let ptosIntermedios = document.querySelector('#puntosIntermedios');
-        let arrPtosIntermedios = [];
+        let puntosIntermedios = document.querySelector('#puntosIntermedios');
+        let arrayPtosIntermedios = [];
 
         // No esta entrando el Switch?
         switch (modoViaje) {
-          case "Auto":" DRIVING "
-          case "Caminando":" WALKING "
-          case "Bus/Subterraneo/Tren":" TRANSIT "
-          console.log(modoViaje)
+          case 'Auto':
+            modoViaje = " DRIVING "
             break;
-          
-          default: " BICYCLING "
+          case 'Caminando':
+            modoViaje = " WALKING "
+            break;
+          case 'Bus/Subterraneo/Tren':
+            modoViaje = " TRANSIT "
+          default:
+            modoViaje = " BICYCLING "
             break;
         }
 
-        for(let i=0; i<ptosIntermedios.length; i++){
-          if(ptosIntermedios.options[i].selected) {
-            arrPtosIntermedios.push({
-              location: ptosIntermedios[i].value,
+        console.log(modoViaje)
+
+        for(let i=0; i<puntosIntermedios.length; i++){
+          if(puntosIntermedios.options[i].selected) {
+            arrayPtosIntermedios.push({
+              location: puntosIntermedios[i].value,
               stopover: true,
             });
           };
@@ -128,18 +134,18 @@ direccionesModulo = (function () {
 
         marcadorModulo.agregarMarcadorRuta(document.getElementById('desde').value, 'A', true)
         // Agrega los marcadores de los puntos intermedios con letras consecutivas.
-        for (var i = 0; i < ptosIntermedios.length; i++) {
+        for (var i = 0; i < puntosIntermedios.length; i++) {
             // console.log(ptsIntermedios[i].location);
             var marcadorLetra = String.fromCharCode('B'.charCodeAt(0) + i)
-            marcadorModulo.agregarMarcadorRuta(ptosIntermedios[i].location, marcadorLetra, false)
+            marcadorModulo.agregarMarcadorRuta(puntosIntermedios[i].location, marcadorLetra, false)
         }
-        marcadorModulo.agregarMarcadorRuta(document.getElementById('hasta').value, String.fromCharCode('B'.charCodeAt(0) + ptosIntermedios.length), false)
+        marcadorModulo.agregarMarcadorRuta(document.getElementById('hasta').value, String.fromCharCode('B'.charCodeAt(0) + puntosIntermedios.length), false)
 
         servicioDirecciones.route({
           origin: desde,
           destination: hasta,
-          travelMode: modoViaje,
-          waypoints: arrPtosIntermedios
+          travelMode: "TRANSIT",
+          waypoints: arrayPtosIntermedios
 
         }, (response, status) => {
           if(status === "OK"){
