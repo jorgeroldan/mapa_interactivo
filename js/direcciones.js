@@ -1,6 +1,6 @@
 direccionesModulo = (function () {
-  var servicioDirecciones // Servicio que calcula las direcciones
-  var mostradorDirecciones // Servicio muestra las direcciones
+  let servicioDirecciones // Servicio que calcula las direcciones
+  let mostradorDirecciones // Servicio muestra las direcciones
 
     // Calcula las rutas cuando se cambian los lugares de desde, hasta o algun punto intermedio
   function calcularRutasConClic () {
@@ -12,8 +12,8 @@ direccionesModulo = (function () {
       direccionesModulo.calcularYMostrarRutas()
     })
 
-    var listasLugares = document.getElementsByClassName('lugares')
-    for (var j = 0; j < listasLugares.length; j++) {
+    let listasLugares = document.getElementsByClassName('lugares')
+    for (let j = 0; j < listasLugares.length; j++) {
       listasLugares[j].addEventListener('change', function () {
         if (document.getElementById('desde').value != '' && document.getElementById('desde').value != '') {
           direccionesModulo.calcularYMostrarRutas()
@@ -24,16 +24,16 @@ direccionesModulo = (function () {
 
     // Agrega la dirección en las lista de Lugares Intermedios en caso de que no estén
   function agregarDireccionEnLista (direccion, coord) {
-    var lugaresIntermedios = document.getElementById('puntosIntermedios')
+    let lugaresIntermedios = document.getElementById('puntosIntermedios')
 
-    var haceFaltaAgregar = true
+    let haceFaltaAgregar = true
     for (i = 0; i < lugaresIntermedios.length; ++i) {
       if (lugaresIntermedios.options[i].text.replace(/\r?\n|\r/g, ' ') === direccion.replace(/\r?\n|\r/g, ' ')) {
         haceFaltaAgregar = false
       }
     }
     if (haceFaltaAgregar) {
-      var opt = document.createElement('option')
+      let opt = document.createElement('option')
       opt.value = coord
       opt.innerHTML = direccion
       lugaresIntermedios.appendChild(opt)
@@ -45,7 +45,7 @@ direccionesModulo = (function () {
     // Agrega la dirección en las listas de puntos intermedios y lo muestra con el street view
   function agregarDireccionYMostrarEnMapa (direccion, ubicacion) {
     that = this
-    var ubicacionTexto = ubicacion.lat + ',' + ubicacion.lng
+    let ubicacionTexto = ubicacion.lat + ',' + ubicacion.lng
     agregarDireccionEnLista(direccion, ubicacionTexto)
     mapa.setCenter(ubicacion)
     streetViewModulo.fijarStreetView(ubicacion)
@@ -54,7 +54,7 @@ direccionesModulo = (function () {
 
   function agregarDireccion (direccion, ubicacion) {
     that = this
-    var ubicacionTexto = ubicacion.lat() + ',' + ubicacion.lng()
+    let ubicacionTexto = ubicacion.lat() + ',' + ubicacion.lng()
     agregarDireccionEnLista(direccion, ubicacionTexto)
     mapa.setCenter(ubicacion)
   }
@@ -65,7 +65,7 @@ direccionesModulo = (function () {
         // Agrega la direccion cuando se presioná enter en el campo agregar
     $('#agregar').keypress(function (e) {
       if (e.keyCode == 13) {
-        var direccion = document.getElementById('agregar').value
+        let direccion = document.getElementById('agregar').value
         geocodificadorModulo.usaDireccion(direccion, direccionesModulo.agregarDireccion)
       }
     })
@@ -117,10 +117,9 @@ direccionesModulo = (function () {
 
         marcadorModulo.agregarMarcadorRuta(document.getElementById('desde').value, 'A', true)
         // Agrega los marcadores de los puntos intermedios con letras consecutivas.
-        for (var i = 0; i < puntosIntermedios.length; i++) {
-            // console.log(ptsIntermedios[i].location);
-            var marcadorLetra = String.fromCharCode('B'.charCodeAt(0) + i)
-            marcadorModulo.agregarMarcadorRuta(puntosIntermedios[i].location, marcadorLetra, false)
+        for (let i = 0; i < puntosIntermedios.length; i++) {
+            let marcadorLetra = String.fromCharCode('B'.charCodeAt(0) + i)
+            marcadorModulo.agregarMarcadorRuta(puntosIntermedios[i].location, marcadorLetra, true)
         }
         marcadorModulo.agregarMarcadorRuta(document.getElementById('hasta').value, String.fromCharCode('B'.charCodeAt(0) + puntosIntermedios.length), false)
 
