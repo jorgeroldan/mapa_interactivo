@@ -13,12 +13,12 @@ marcadorModulo = (function () {
         El marcador que vas a crear debe asignarse a la variable miMarcador */
 
     miMarcador = new google.maps.Marker({
-      map: mapa,
-      animation: google.maps.Animation.DROP,
+      position: ubicacion, 
+      map: map,
       title: document.getElementById('direccion').value,
-      position: ubicacion 
+      animation: google.maps.Animation.DROP
     });
-
+      
   }
 
     // Agrega la dirección del marcador en la lista de Lugares Intermedios
@@ -36,11 +36,6 @@ marcadorModulo = (function () {
     }
   }
 
-    // Muestra todos los marcadores. Por ahora no la uso
-  function mostrarMarcadores (marcadores) {
-    marcadoresEnMapa(marcadores, mapa)
-  }
-
     // Saca los marcadores del mapa, pero siguen en el Array marcadores.
   function noMostrarMarcadores (marcadores) {
     marcadoresEnMapa(marcadores, null)
@@ -52,15 +47,7 @@ marcadorModulo = (function () {
     marcadores = []
   }
 
-    // Borra todos los marcadores del mapa y del array.
-  function borrarMarcadoresRuta (marcadores) {
-    borrarMarcadores(marcadoresRuta)
-  }
 
-    // Borra todos los marcadores del mapa y del array.
-  function borrarMarcadoresLugares (marcadores) {
-    borrarMarcadores(marcadoresLugares)
-  }
     // Cuando cambia el elemento "tipoDeLugar" marco todos lugares cerca
     // del lugar indicado por MiMarcador
   var tipoDeLugar = document.getElementById('tipoDeLugar')

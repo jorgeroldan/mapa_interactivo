@@ -124,7 +124,8 @@ direccionesModulo = (function () {
             let marcadorLetra = String.fromCharCode('B'.charCodeAt(0) + i)
             marcadorModulo.agregarMarcadorRuta(puntosIntermedios[i].location, marcadorLetra, true)
         }
-        marcadorModulo.agregarMarcadorRuta(document.getElementById('hasta').value, String.fromCharCode('B'.charCodeAt(0) + puntosIntermedios.length), false)
+        marcadorModulo.agregarMarcadorRuta(document.getElementById('hasta').value, String.fromCharCode('B'.charCodeAt(0) + puntosIntermedios.length), true)
+
 
         servicioDirecciones.route({
           origin: desde,
