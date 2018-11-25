@@ -117,6 +117,7 @@ direccionesModulo = (function () {
           };
         };
 
+
         marcadorModulo.agregarMarcadorRuta(document.getElementById('desde').value, 'A', true)
         // Agrega los marcadores de los puntos intermedios con letras consecutivas.
         for (let i = 0; i < puntosIntermedios.length; i++) {
@@ -129,7 +130,8 @@ direccionesModulo = (function () {
           origin: desde,
           destination: hasta,
           travelMode: travelMode,
-          waypoints: wayPoints
+          waypoints: wayPoints, 
+          optimizeWaypoints: true, 
 
         }, (response, status) => {
           if(status === "OK"){
