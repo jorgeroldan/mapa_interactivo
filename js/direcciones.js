@@ -1,6 +1,6 @@
 direccionesModulo = (function () {
-  let servicioDirecciones // Servicio que calcula las direcciones
-  let mostradorDirecciones // Servicio muestra las direcciones
+  var servicioDirecciones // Servicio que calcula las direcciones
+  var mostradorDirecciones // Servicio muestra las direcciones
 
     // Calcula las rutas cuando se cambian los lugares de desde, hasta o algun punto intermedio
   function calcularRutasConClic () {
@@ -12,8 +12,8 @@ direccionesModulo = (function () {
       direccionesModulo.calcularYMostrarRutas()
     })
 
-    let listasLugares = document.getElementsByClassName('lugares')
-    for (let j = 0; j < listasLugares.length; j++) {
+    var listasLugares = document.getElementsByClassName('lugares')
+    for (var j = 0; j < listasLugares.length; j++) {
       listasLugares[j].addEventListener('change', function () {
         if (document.getElementById('desde').value != '' && document.getElementById('desde').value != '') {
           direccionesModulo.calcularYMostrarRutas()
@@ -24,28 +24,26 @@ direccionesModulo = (function () {
 
     // Agrega la dirección en las lista de Lugares Intermedios en caso de que no estén
   function agregarDireccionEnLista (direccion, coord) {
-    let lugaresIntermedios = document.getElementById('puntosIntermedios')
+    var lugaresIntermedios = document.getElementById('puntosIntermedios')
 
-    let haceFaltaAgregar = true
+    var haceFaltaAgregar = true
     for (i = 0; i < lugaresIntermedios.length; ++i) {
       if (lugaresIntermedios.options[i].text.replace(/\r?\n|\r/g, ' ') === direccion.replace(/\r?\n|\r/g, ' ')) {
         haceFaltaAgregar = false
       }
     }
     if (haceFaltaAgregar) {
-      let opt = document.createElement('option')
+      var opt = document.createElement('option')
       opt.value = coord
       opt.innerHTML = direccion
       lugaresIntermedios.appendChild(opt)
     }
   }
 
-  // CALLBACK que viene de geocodificador.js 
-
     // Agrega la dirección en las listas de puntos intermedios y lo muestra con el street view
   function agregarDireccionYMostrarEnMapa (direccion, ubicacion) {
     that = this
-    let ubicacionTexto = ubicacion.lat + ',' + ubicacion.lng
+    var ubicacionTexto = ubicacion.lat() + ',' + ubicacion.lng()
     agregarDireccionEnLista(direccion, ubicacionTexto)
     mapa.setCenter(ubicacion)
     streetViewModulo.fijarStreetView(ubicacion)
@@ -54,7 +52,7 @@ direccionesModulo = (function () {
 
   function agregarDireccion (direccion, ubicacion) {
     that = this
-    let ubicacionTexto = ubicacion.lat() + ',' + ubicacion.lng()
+    var ubicacionTexto = ubicacion.lat() + ',' + ubicacion.lng()
     agregarDireccionEnLista(direccion, ubicacionTexto)
     mapa.setCenter(ubicacion)
   }
@@ -65,7 +63,7 @@ direccionesModulo = (function () {
         // Agrega la direccion cuando se presioná enter en el campo agregar
     $('#agregar').keypress(function (e) {
       if (e.keyCode == 13) {
-        let direccion = document.getElementById('agregar').value
+        var direccion = document.getElementById('agregar').value
         geocodificadorModulo.usaDireccion(direccion, direccionesModulo.agregarDireccion)
       }
     })
@@ -99,14 +97,15 @@ direccionesModulo = (function () {
          usuario quiere ir de un camino al otro, calcula la ruta entre esas dos posiciones
          y luego muestra la ruta. */
 
-
         let desde = document.querySelector('#desde').value;
         let hasta = document.querySelector('#hasta').value;
         let modoViaje =  document.querySelector('#comoIr').value;
         let travelMode = google.maps.TravelMode[modoViaje]
         let puntosIntermedios = document.querySelector('#puntosIntermedios');
-        let wayPoints = [];
+        let wayPoints = []
 
+        console.log('Puntos Intermedios: ', puntosIntermedios)
+        console.log('wayPoints: ', wayPoints)
 
         for(let i=0; i<puntosIntermedios.length; i++){
           if(puntosIntermedios.options[i].selected) {
@@ -118,11 +117,14 @@ direccionesModulo = (function () {
         };
 
 
+        // borrarMarcadores(marcadoresRuta)
         marcadorModulo.agregarMarcadorRuta(document.getElementById('desde').value, 'A', true)
+
         // Agrega los marcadores de los puntos intermedios con letras consecutivas.
         for (let i = 0; i < puntosIntermedios.length; i++) {
             let marcadorLetra = String.fromCharCode('B'.charCodeAt(0) + i)
-            marcadorModulo.agregarMarcadorRuta(puntosIntermedios[i].location, marcadorLetra, true)
+            console.log('marcadorLetra: ', marcadorLetra)
+            marcadorModulo.agregarMarcadorRuta(puntosIntermedios[i].location, marcadorLetra, false)
         }
         marcadorModulo.agregarMarcadorRuta(document.getElementById('hasta').value, String.fromCharCode('B'.charCodeAt(0) + puntosIntermedios.length), true)
 
@@ -139,13 +141,16 @@ direccionesModulo = (function () {
              mostradorDirecciones.setDirections(response)
           }
         });
+
   }
+
+
 
   return {
     inicializar,
     agregarDireccion,
     agregarDireccionEnLista,
     agregarDireccionYMostrarEnMapa,
-    calcularYMostrarRutas
+    calcularYMostrarRutas, 
   }
 }())

@@ -1,0 +1,22 @@
+{
+  "name": "mapa-interactivo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jorgeroldan/mapa_interactivo.git"
+  },
+  "author": "Jorge Roldan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jorgeroldan/mapa_interactivo/issues"
+  },
+  "homepage": "https://github.com/jorgeroldan/mapa_interactivo#readme",
+  "dependencies": {
+    "sweetalert": "^2.1.2"
+  }
+}
