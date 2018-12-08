@@ -45,38 +45,45 @@ lugaresModulo = (function () {
 
   // Busca lugares con el tipo especificado en el campo de TipoDeLugar
 
+  function construirRequestTipoLugar(posicion){
+    let tipoDeLugar = document.getElementById('tipoDeLugar').value;
+    let radio = document.getElementById('radio').value;
+    console.log(tipoDeLugar)
+    console.log(radio)
+
+    let request = {
+      location: posicion, 
+      radius: 3000,
+      type: tipoDeLugar
+    }
+    
+    return request
+  }
+
   function buscarCerca(posicion) {
     /* Completar la función buscarCerca  que realice la búsqueda de los lugares
 del tipo (tipodeLugar) y con el radio indicados en el HTML cerca del lugar
 pasado como parámetro y llame a la función marcarLugares. */
+    let reqNerbySearch = construirRequestTipoLugar(posicion)
+    console.log(reqNerbySearch)
+    servicioLugares.nearbySearch(reqNerbySearch, callbackNerbySearch)
 
-    let tipoDeLugar = document.getElementById('tipoDeLugar').value;
-    let radio = document.getElementById('radio').value;
-
-    console.log(tipoDeLugar)
-    console.log(radio)
-
-    servicioLugares.nearbySearch({
-      radius: radio,
-      name: tipoDeLugar,
-      location: posicion
-    }, function (results, status) {
-
-      if (results.length != 0) {
-        marcadorModulo.marcarLugares(results, status);
-        console.log(results)
-      } else {
-        swal({
-          title: "No encontramos ese tipo de lugares en el rango de: " + radio + "mts",
-          text: "Intenta con otros lugares y/o modificando el radio de la busqueda",
-          icon: "warning",
-          timer: 3000,
-          buttons: false,
-        });
-      }
-    });
   };
 
+  function callbackNerbySearch(results, status) {
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+        marcadorModulo.marcarLugares(results, status);
+        console.log(results)
+    } else {
+      swal({
+        title: "No encontramos ese tipo de lugares en el rango de: " + radio + "mts",
+        text: "Intenta con otros lugares y/o modificando el radio de la busqueda",
+        icon: "warning",
+        timer: 3000,
+        buttons: false,
+      });
+    }
+  }
 
   return {
     inicializar,
