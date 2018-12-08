@@ -128,7 +128,8 @@ direccionesModulo = (function () {
         for (let i = 0; i < puntosIntermedios.length; i++) {
             marcadorLetra = obtenerSiguienteLetra(marcadorLetra)
             console.log('marcadorLetra: ', marcadorLetra)
-            marcadorModulo.agregarMarcadorRuta(puntosIntermedios[i].location, marcadorLetra, false)
+            console.log('Puntos intermedios : ', puntosIntermedios[i].value)
+            marcadorModulo.agregarMarcadorRuta(puntosIntermedios[i].value, marcadorLetra, false)
         }
         marcadorLetra = obtenerSiguienteLetra(marcadorLetra)
         console.log('marcadorLetra: ', marcadorLetra)
