@@ -180,6 +180,7 @@ marcadorModulo = (function () {
     return miMarcador.getPosition()
   }
 
+    // ESTO ES LO QUE HAY QUE REVISAR: MARCADOR EN LOS PUNTOS INTERMEDIOS
     // Agrego el marcador con la ruta. Le asigna las letras correspondientes al marcador.
     // Al hacer click en el marcador se fija el StreetView en la posición de este.
   function agregarMarcadorRuta (direccion, letra, esInicial) {
@@ -206,6 +207,7 @@ marcadorModulo = (function () {
       })
 
       marcadoresRuta.push(marcador)
+      // console.log("marcador puntos: "+marcador.label)
     }
     geocodificadorModulo.usaDireccion(direccion, agregarMarcadorConStreetView)
     mapa.fitBounds(limites)

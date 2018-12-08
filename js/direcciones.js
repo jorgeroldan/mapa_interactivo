@@ -97,6 +97,7 @@ direccionesModulo = (function () {
          usuario quiere ir de un camino al otro, calcula la ruta entre esas dos posiciones
          y luego muestra la ruta. */
 
+         mostradorDirecciones.setMap(mapa);
         let desde = document.querySelector('#desde').value;
         let hasta = document.querySelector('#hasta').value;
         let modoViaje =  document.querySelector('#comoIr').value;
@@ -116,17 +117,22 @@ direccionesModulo = (function () {
           };
         };
 
-
+        // ESTO ES LO QUE HAY QUE REVISAR: MARCADOR EN LOS PUNTOS INTERMEDIOS
         // borrarMarcadores(marcadoresRuta)
-        marcadorModulo.agregarMarcadorRuta(document.getElementById('desde').value, 'A', true)
+        let marcadorLetra = 'A';
+        console.log('marcadorLetra: ', marcadorLetra)
+
+        marcadorModulo.agregarMarcadorRuta(desde, marcadorLetra, true)
 
         // Agrega los marcadores de los puntos intermedios con letras consecutivas.
         for (let i = 0; i < puntosIntermedios.length; i++) {
-            let marcadorLetra = String.fromCharCode('B'.charCodeAt(0) + i)
+            marcadorLetra = obtenerSiguienteLetra(marcadorLetra)
             console.log('marcadorLetra: ', marcadorLetra)
             marcadorModulo.agregarMarcadorRuta(puntosIntermedios[i].location, marcadorLetra, false)
         }
-        marcadorModulo.agregarMarcadorRuta(document.getElementById('hasta').value, String.fromCharCode('B'.charCodeAt(0) + puntosIntermedios.length), true)
+        marcadorLetra = obtenerSiguienteLetra(marcadorLetra)
+        console.log('marcadorLetra: ', marcadorLetra)
+        marcadorModulo.agregarMarcadorRuta(hasta, marcadorLetra, false)
 
 
         servicioDirecciones.route({
@@ -144,6 +150,9 @@ direccionesModulo = (function () {
 
   }
 
+  function obtenerSiguienteLetra(marcadorLetra){
+    return String.fromCharCode(marcadorLetra.charCodeAt(0) + 1);
+  }
 
 
   return {
