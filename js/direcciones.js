@@ -108,8 +108,10 @@ direccionesModulo = (function () {
         console.log('Puntos Intermedios: ', puntosIntermedios)
         console.log('wayPoints: ', wayPoints)
 
+        
         for(let i=0; i<puntosIntermedios.length; i++){
-          if(puntosIntermedios.options[i].selected) {
+          debugger
+          if(puntosIntermedios[i].selected) {
             wayPoints.push({
               location: puntosIntermedios[i].value,
               stopover: true,
@@ -120,19 +122,19 @@ direccionesModulo = (function () {
         // ESTO ES LO QUE HAY QUE REVISAR: MARCADOR EN LOS PUNTOS INTERMEDIOS
         // borrarMarcadores(marcadoresRuta)
         let marcadorLetra = 'A';
-        console.log('marcadorLetra: ', marcadorLetra)
+        console.log('Puntos intermedios : ', puntosIntermedios)
 
         marcadorModulo.agregarMarcadorRuta(desde, marcadorLetra, true)
 
         // Agrega los marcadores de los puntos intermedios con letras consecutivas.
-        for (let i = 0; i < puntosIntermedios.length; i++) {
+        for (let i = 0; i < wayPoints.length; i++) {
             marcadorLetra = obtenerSiguienteLetra(marcadorLetra)
-            console.log('marcadorLetra: ', marcadorLetra)
-            console.log('Puntos intermedios : ', puntosIntermedios[i].value)
-            marcadorModulo.agregarMarcadorRuta(puntosIntermedios[i].value, marcadorLetra, false)
+
+            console.log('Puntos intermedios : ', wayPoints[i].location)
+            marcadorModulo.agregarMarcadorRuta(wayPoints[i].location, marcadorLetra, false)
         }
         marcadorLetra = obtenerSiguienteLetra(marcadorLetra)
-        console.log('marcadorLetra: ', marcadorLetra)
+
         marcadorModulo.agregarMarcadorRuta(hasta, marcadorLetra, false)
 
 
